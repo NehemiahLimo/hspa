@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 @Component({
   selector: 'app-property-card',
   // template: '<h1>Card component</h1>'
