@@ -9,10 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { HousingService } from './services/housing.service';
 import { AddPropertyComponent } from './property/add-property/add-property.component';
 import {Routes, RouterModule} from '@angular/router';
+import { PropertyDetailComponent } from './property/property-detail/property-detail.component';
 
-const appRoutes: Routes = [
+const appRoutes: Routes =
+[
   {path: '', component: PropertyListComponent},
-  {path: 'add-property', component: AddPropertyComponent}
+  {path: 'add-property', component: AddPropertyComponent},
+  {path: 'rent-property', component: PropertyListComponent},
+  {path: 'property-details/:id', component: PropertyDetailComponent}
 ]
 
 @NgModule({
@@ -21,7 +25,8 @@ const appRoutes: Routes = [
     PropertyCardComponent,
     PropertyListComponent,
     NavBarComponent,
-    AddPropertyComponent
+    AddPropertyComponent,
+    PropertyDetailComponent
   ],
   imports: [
     BrowserModule,
