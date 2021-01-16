@@ -7,17 +7,26 @@ import { PropertyListComponent } from './property/property-list/property-list.co
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HousingService } from './services/housing.service';
+import { AddPropertyComponent } from './property/add-property/add-property.component';
+import {Routes, RouterModule} from '@angular/router';
+
+const appRoutes: Routes = [
+  {path: '', component: PropertyListComponent},
+  {path: 'add-property', component: AddPropertyComponent}
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     PropertyCardComponent,
     PropertyListComponent,
-    NavBarComponent
+    NavBarComponent,
+    AddPropertyComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     HousingService
