@@ -3,3 +3,14 @@
 </p>
 
 Slelected property is {{propertyId}}
+
+<button (click)="onSelectNext()" class="btn btn-primary" >Select Next</button>
+
+<br>
+<br>
+
+<button class="btn btn-primary" routerLink="/property-details/1">1</button>
+<button class="btn btn-primary" routerLink="/property-details/2">2</button>
+<button class="btn btn-primary" routerLink="/property-details/3">3</button>
+<button class="btn btn-primary" [routerLink]="['/property-details',4]">4</button>
+
