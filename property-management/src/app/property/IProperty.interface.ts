@@ -5,6 +5,7 @@ export interface IProperty
    Name: string;
    Type: string;
    Phone: number;
+   Price: number;
    Image?: string;
 
  }
