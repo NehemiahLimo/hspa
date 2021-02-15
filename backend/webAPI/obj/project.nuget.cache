@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "2RwVosTNL/wiehdslfHR/ekZ3fGv0yt35fd7PUWlniSCwb/+wsCCFk7IZ6cYjfx5brADZnxY/M/yj3wem6PR8A==",
+  "success": true,
+  "projectFilePath": "D:\\pms\\backend\\webAPI\\webAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ncheburet\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\ncheburet\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.10\\microsoft.netcore.app.host.win-x64.3.1.10.nupkg.sha512"
+  ],
+  "logs": []
+}
