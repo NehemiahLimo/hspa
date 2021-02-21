@@ -1,3 +1,7 @@
+.card{
+  min-height: 400px;
+}
+
 .propImage{
   height: 250px;
   overflow: hidden;
