@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { IProperty } from '../property/IProperty.interface';
 import { Observable } from 'rxjs';
+import { Property } from '../model/property';
 
 
 
@@ -29,5 +30,16 @@ SellRent = 1;
 
       })
     );
+  }
+
+  addProperty(property: Property){
+    let newProp = [property];
+
+    // Add new property in array if newProp alreay exists in local storage
+    if (localStorage.getItem('newProp')) {
+      newProp = [property,
+                  ...JSON.parse(localStorage.getItem('newProp'))];
+    }
+    localStorage.setItem('newProp', JSON.stringify(newProp));
   }
 }
