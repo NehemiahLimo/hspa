@@ -12,8 +12,8 @@ import { AlertyfyService } from 'src/app/services/alertyfy.service';
 })
 export class UserRegisterComponent implements OnInit {
 registrationForm: FormGroup;
-user: User;
-userSubmitted: boolean;
+user: User ;
+userSubmitted: boolean ;
   constructor(private fb: FormBuilder, private userService: UserServiceService, private alertyfy: AlertyfyService) { }
 
   ngOnInit() {
@@ -97,9 +97,8 @@ userSubmitted: boolean;
 
   // }
 
-  passValidator(fg: FormGroup): Validators{
-    return fg.get('password')?.value ===  fg.get('confirmPassword')?.value ? null :
-    {notmatched: true};
+  passValidator(fg: FormGroup): validators{
+    return fg.get('password').value ===  fg.get('confirmPassword').value ? null : {notmatched: true};
 
   }
 
