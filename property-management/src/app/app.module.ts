@@ -22,6 +22,8 @@ import { UserRegisterComponent } from './user/user-register/user-register/user-r
 import { UserServiceService } from './services/user-service.service';
 import { AlertyfyService } from './services/alertyfy.service';
 import { AuthService } from './services/auth.service';
+import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 const appRoutes: Routes =
 [
   {path: '', component: PropertyListComponent},
@@ -30,7 +32,7 @@ const appRoutes: Routes =
   {path: 'user/login', component: UserLoginComponent},
   {path: 'user/register', component: UserRegisterComponent},
 
-  {path: 'property-details/:id', component: PropertyDetailComponent},
+  {path: 'property-details/:id', component: PropertyDetailComponent, resolve:{prp: PropertyDetailResolverService }},
   {path: '**', component: PropertyListComponent}
 
 ];
@@ -51,6 +53,7 @@ const appRoutes: Routes =
     FormsModule,
     BrowserModule,
     HttpClientModule,
+    NgxGalleryModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -62,7 +65,8 @@ const appRoutes: Routes =
     HousingService,
     UserServiceService,
     AlertyfyService,
-    AuthService
+    AuthService,
+    PropertyDetailResolverService
   ],
   bootstrap: [AppComponent]
 })
