@@ -24,6 +24,8 @@ import { AlertyfyService } from './services/alertyfy.service';
 import { AuthService } from './services/auth.service';
 import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { FilterPipe } from './pipes/filter.pipe';
+import { SortPipe } from './pipes/sort.pipe';
 const appRoutes: Routes =
 [
   {path: '', component: PropertyListComponent},
@@ -46,7 +48,9 @@ const appRoutes: Routes =
     AddPropertyComponent,
     PropertyDetailComponent,
     UserLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    FilterPipe,
+    SortPipe
   ],
   imports: [
     ReactiveFormsModule,

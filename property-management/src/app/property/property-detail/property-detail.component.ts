@@ -1,4 +1,3 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
@@ -13,7 +12,6 @@ import { HousingService } from 'src/app/services/housing.service';
 export class PropertyDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-  ;
   public propertyId: number;
   property = new Property();
   constructor(private route: ActivatedRoute, private router: Router, private housingService: HousingService) { }
@@ -23,7 +21,7 @@ export class PropertyDetailComponent implements OnInit {
     this.propertyId = +this.route.snapshot.params['id'];
     this.route.data.subscribe(
       (data: Property) =>{
-        this.Property = data['prp'];
+        this.property = data['prp'];
       }
     );
 

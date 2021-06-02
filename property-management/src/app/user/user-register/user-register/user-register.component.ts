@@ -97,7 +97,7 @@ userSubmitted: boolean ;
 
   // }
 
-  passValidator(fg: FormGroup): validators{
+  passValidator(fg: FormGroup): Validators{
     return fg.get('password').value ===  fg.get('confirmPassword').value ? null : {notmatched: true};
 
   }
