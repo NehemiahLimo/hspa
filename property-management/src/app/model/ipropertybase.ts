@@ -5,7 +5,6 @@ export interface IPropertyBase
    Name: string;
    PType: string;
    FType: string;
-   Phone: number;
    BHK: number;
    BuiltArea: number;
    City: string;

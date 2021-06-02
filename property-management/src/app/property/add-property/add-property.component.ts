@@ -45,6 +45,7 @@ export class AddPropertyComponent implements OnInit {
 
 
 
+  // tslint:disable-next-line: typedef
   ngOnInit() {
     this.createAddPropertyForm();
   }
@@ -119,10 +120,12 @@ export class AddPropertyComponent implements OnInit {
   get Price() {
     return this.PriceInfo.controls.Price as FormControl;
   }
+  // tslint:disable-next-line: typedef
   get BHK() {
     return this.BasicInfo.controls.BHK as FormControl;
   }
 
+  // tslint:disable-next-line: typedef
   get PType() {
     return this.BasicInfo.controls.PType as FormControl;
   }
@@ -201,15 +204,16 @@ export class AddPropertyComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  onSubmit(Form: NgForm){
+  // tslint:disable-next-line: typedef
+  onSubmit(){
     this.nextClicked = true;
     if (this.allTabsValid()) {
       this.mapProperty();
       this.housingService.addProperty(this.property);
-      this.alertify.success('Congrats, submitted');
+      this.alertify.success('Property Added Successfully');
       console.log(this.addProperty);
       console.log('SellRent=' + this.addProperty.value.BasicInfo.SellRent);
-      if(this.SellRenty.value === '2') {
+      if (this.SellRenty.value === '2') {
         this.router.navigate(['/rent-property']);
       } else {
         this.router.navigate(['/']);
@@ -222,8 +226,8 @@ export class AddPropertyComponent implements OnInit {
   }
 
   mapProperty(): void {
-    this.propertyId = this.housingService.newPropId();
-    this.property.SellRent = +this.SellRent.value;
+    this.property.Id = this.housingService.newPropId();
+    this.property.SellRent = +this.SellRent.valueOf;
     this.property.BHK = this.BHK.value;
     this.property.PType = this.PType.value;
     this.property.Name = this.Name.value;

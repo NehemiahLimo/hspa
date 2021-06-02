@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "hspa-nbi"
+  },
+  "targets": {
+    "hspa-nbi": {
+      "hosting": {
+        "property-management": [
+          "hspa-nbi"
+        ]
+      }
+    }
+  }
+}

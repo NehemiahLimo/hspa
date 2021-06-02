@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HousingService } from 'src/app/services/housing.service';
-import { IProperty } from '../IProperty.interface';
-
+import { IPropertyBase } from 'src/app/model/ipropertybase';
 
 @Component({
   selector: 'app-property-list',
@@ -11,8 +10,11 @@ import { IProperty } from '../IProperty.interface';
 })
 export class PropertyListComponent implements OnInit {
   SellRent = 1;
-  properties: IProperty[] = [];
-
+  properties: IPropertyBase[] = [];
+  City = '';
+  SearchCity = '';
+  SortByParam = '';
+  SortDirection = 'asc';
 
 
   constructor(private route: ActivatedRoute, private housingService: HousingService) { }
@@ -34,6 +36,28 @@ export class PropertyListComponent implements OnInit {
 }
 );
 
+  }
+
+  // tslint:disable-next-line: typedef
+  onCityFilter(){
+this.SearchCity = this.City;
+  }
+
+
+  // tslint:disable-next-line: typedef
+  onCityClear(){
+this.SearchCity = '';
+this.City = '';
+  }
+  // tslint:disable-next-line: typedef
+  onSortDirection(){
+    if (this.SortDirection === 'desc')
+    {
+      this.SortDirection = 'asc';
+    }
+    else{
+      this.SortDirection = 'desc';
+    }
   }
 
 }
