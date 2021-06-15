@@ -25,6 +25,8 @@ export class AddPropertyComponent implements OnInit {
   furnishTypes: Array<string> = ['Fully', 'Semi', 'Unfurnished'];
   dir: Array<string> = ['East', 'West', 'North', 'South'];
 
+cityList: string[];
+
   propertyView: IPropertyBase =  {
     Id: null,
     Name: '',
@@ -34,7 +36,7 @@ export class AddPropertyComponent implements OnInit {
     FType: null,
     BHK: null,
     BuiltArea: null,
-    City: null,
+    City: '',
     RTM: null
 
   };
@@ -48,10 +50,16 @@ export class AddPropertyComponent implements OnInit {
   // tslint:disable-next-line: typedef
   ngOnInit() {
     this.createAddPropertyForm();
+    this.housingService.getAllCities().subscribe(data=>{
+      this.cityList=data;
+      console.log("---Data---",data);
+    })
   }
 
   // tslint:disable-next-line: typedef
   createAddPropertyForm(){
+
+
     this.addProperty = this.fb.group({
       BasicInfo: this.fb.group({
         SellRent: ['1', Validators.required],
