@@ -12,5 +12,11 @@ namespace webAPI.Controllers
     public class CityController : ControllerBase
     {
 
+        [HttpGet("cities")]
+        public IEnumerable<string> getAllCities()
+        {
+            return new string[] { "Nairobi", "Kijabe", "Nakuru" };
+        }
+
     }
 }

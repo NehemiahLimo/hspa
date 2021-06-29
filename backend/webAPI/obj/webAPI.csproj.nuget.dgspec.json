@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\pms\\backend\\webAPI\\webAPI.csproj": {}
+    "F:\\pms\\hspa\\backend\\webAPI\\webAPI.csproj": {}
   },
   "projects": {
-    "D:\\pms\\backend\\webAPI\\webAPI.csproj": {
+    "F:\\pms\\hspa\\backend\\webAPI\\webAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\pms\\backend\\webAPI\\webAPI.csproj",
+        "projectUniqueName": "F:\\pms\\hspa\\backend\\webAPI\\webAPI.csproj",
         "projectName": "webAPI",
-        "projectPath": "D:\\pms\\backend\\webAPI\\webAPI.csproj",
-        "packagesPath": "C:\\Users\\ncheburet\\.nuget\\packages\\",
-        "outputPath": "D:\\pms\\backend\\webAPI\\obj\\",
+        "projectPath": "F:\\pms\\hspa\\backend\\webAPI\\webAPI.csproj",
+        "packagesPath": "C:\\Users\\Lee\\.nuget\\packages\\",
+        "outputPath": "F:\\pms\\hspa\\backend\\webAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ncheburet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Lee\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -42,6 +39,12 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -60,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
