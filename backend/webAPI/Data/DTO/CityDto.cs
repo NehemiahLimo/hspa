@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace webAPI.Models
+namespace webAPI.Data.DTO
 {
-    public class City
+    public class CityDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime LastUpdate { get; set; }
-        public int LastUpdatedBy { get; set; }
     }
 }
