@@ -31,7 +31,7 @@ namespace webAPI
         {
             
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), p => p.EnableRetryOnFailure()));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
             services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
             services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections;
@@ -64,6 +65,49 @@ namespace webAPI.Controllers
             uow.CityRepository.AddCity(city);
             await uow.SaveAsync();
             return StatusCode(201);
+        }
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateCity(int id, CityDto cityDto)
+        {
+            var city = await uow.CityRepository.FindCity(id);
+            
+            city.LastUpdate = DateTime.Now;
+            city.LastUpdatedBy = 1;
+            mapper.Map(cityDto, city);
+            await uow.SaveAsync();
+            return StatusCode(200);
+
+            //await uow.CityRepository.AddCity(city);
+        }
+
+        [HttpPut("updateCityName/{id}")]
+        public async Task<IActionResult> UpdateCityName(int id, CityUpdateDto cityDto)
+        {
+            var city = await uow.CityRepository.FindCity(id);
+
+            city.LastUpdate = DateTime.Now;
+            city.LastUpdatedBy = 1;
+            mapper.Map(cityDto, city);
+            await uow.SaveAsync();
+            return StatusCode(200);
+
+            //await uow.CityRepository.AddCity(city);
+        }
+        [HttpPatch("update/{id}")]
+        public async Task<IActionResult> UpdateCityPatch(int id,    JsonPatchDocument<City> cityPatch)
+        {
+            var city = await uow.CityRepository.FindCity(id);
+
+            city.LastUpdate = DateTime.Now;
+            city.LastUpdatedBy = 1;
+            /*mapper.Map(cityDto, city);*/
+
+            cityPatch.ApplyTo(city, ModelState);
+            await uow.SaveAsync();
+            return StatusCode(200);
+
+            //await uow.CityRepository.AddCity(city);
         }
 
 

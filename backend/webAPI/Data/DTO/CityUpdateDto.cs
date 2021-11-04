@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace webAPI.Data.DTO
 {
-    public class CityDto
+    public class CityUpdateDto
     {
-        public int Id { get; set; }
+       
         public string Name { get; set; }
-        public string Country { get; set; }
+       
     }
 }

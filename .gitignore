@@ -27,8 +27,8 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
-[Oo]bj/
+../backend/webAPI/bin/
+obj/
 [Oo]ut/
 [Ll]og/
 [Ll]ogs/

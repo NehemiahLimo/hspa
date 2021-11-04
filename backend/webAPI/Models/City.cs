@@ -9,6 +9,7 @@ namespace webAPI.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Country { get; set; }
         public DateTime LastUpdate { get; set; }
         public int LastUpdatedBy { get; set; }
     }
