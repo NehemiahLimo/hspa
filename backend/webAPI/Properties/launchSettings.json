@@ -14,6 +14,7 @@
       "launchBrowser": true,
       "launchUrl": "api/city",
       "environmentVariables": {
+        //"ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
@@ -22,6 +23,7 @@
       "launchBrowser": true,
       "launchUrl": "api/city",
       "environmentVariables": {
+        //"ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_ENVIRONMENT": "Production"
       },
       "applicationUrl": "http://localhost:5000"
