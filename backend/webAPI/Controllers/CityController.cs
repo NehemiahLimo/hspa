@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,9 +14,10 @@ using webAPI.Models;
 
 namespace webAPI.Controllers
 {
-   
+    [Authorize]
     public class CityController : BaseController
     {
+        
         private readonly IUnitOfWork uow;
         private readonly IMapper mapper;
 
@@ -26,6 +28,7 @@ namespace webAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllCities()
         {
             //throw new UnauthorizedAccessException();
@@ -79,7 +82,7 @@ namespace webAPI.Controllers
             city.LastUpdatedBy = 1;
             mapper.Map(cityDto, city);
 
-            throw new Exception("Kunomaaa");
+            //throw new Exception("Kunomaaa");
             await uow.SaveAsync();
             return StatusCode(200);
 
