@@ -12,5 +12,6 @@ namespace webAPI.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<City> Cities { get; set; }
+        public DbSet<User> users { get; set; }
     }
 }
