@@ -27,8 +27,13 @@ namespace webAPI.Controllers
             this.configuration = configuration;
         }
 
-
-        [HttpPost("login")]
+        [HttpGet("fetchusers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users= await uow.UserRepository.GetAllUsersAsync();
+            return Ok(users);
+        }
+            [HttpPost("login")]
         public async Task<IActionResult> Login(LoginReqDto loginReq)
         {
             var user = await uow.UserRepository.Authenticate(loginReq.UserName, loginReq.Password);
@@ -42,7 +47,17 @@ namespace webAPI.Controllers
             return Ok(loginRes);  
         }
 
-        public string CreateJWT(User user)
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(LoginReqDto loginReq)
+        {
+            if (await uow.UserRepository.UserAlreadyExist(loginReq.UserName))
+                return BadRequest("Username Already exist");
+            uow.UserRepository.Register(loginReq.UserName, loginReq.Password);
+            await uow.SaveAsync();
+            return StatusCode(201);
+        }
+            public string CreateJWT(User user)
         {
             var secretKey = configuration.GetSection("AppSettings:Key").Value;
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
