@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,8 +39,11 @@ namespace webAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //IdentityModelEventSource.ShowPII = true;
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), p => p.EnableRetryOnFailure()));
+            var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"));
+            builder.Password = Configuration.GetSection("DBPassword").Value;
+            var connectionString = builder.ConnectionString;
+            IdentityModelEventSource.ShowPII = true;
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString, p => p.EnableRetryOnFailure()));
             services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
             services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
