@@ -40,7 +40,7 @@ namespace webAPI
         public void ConfigureServices(IServiceCollection services)
         {
             var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"));
-            builder.Password = Configuration.GetSection("DBPassword").Value;
+                builder.Password = Configuration.GetSection("DBPassword").Value;
             var connectionString = builder.ConnectionString;
             IdentityModelEventSource.ShowPII = true;
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString, p => p.EnableRetryOnFailure()));
@@ -81,6 +81,8 @@ namespace webAPI
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
