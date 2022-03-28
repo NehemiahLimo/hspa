@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 // import { Alertyfy } from 'src/app/services/alertify.service';
 import { Router } from '@angular/router';
 import { AlertyfyService } from 'src/app/services/alertyfy.service';
+import { UserForLogin } from 'src/app/model/user';
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -21,16 +22,17 @@ export class UserLoginComponent implements OnInit {
   // tslint:disable-next-line: typedef
   onLogin(loginForm: NgForm) {
     console.log(loginForm.value);
-    const token = this.authService.authUser(loginForm.value);
-    if (token) {
-      //console.log('success');
-      localStorage.setItem('token', token.userName);
+    this.authService.authUser(loginForm.value).subscribe((res:UserForLogin)=>{
+
+      const user = res;
+      localStorage.setItem('token', user.token);
+      localStorage.setItem('userName', user.userName);
       this.alertify.success('Login Successful');
       this.router.navigate(['/']);
-    } else {
-      //console.log('fail');
-      this.alertify.error('User id or password is wrong');
-    }
+      console.log(res);
+    }   
+    );
+   
   }
 
 }

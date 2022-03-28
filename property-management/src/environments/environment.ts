@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://localhost:16745/api"
+  baseUrl: "http://localhost:16745/api" //"https://propatymanagement.azurewebsites.net/api" //
 };
 
 /*

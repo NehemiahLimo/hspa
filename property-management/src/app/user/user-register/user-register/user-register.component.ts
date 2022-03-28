@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
-import { User } from 'src/app/model/user';
-import { UserServiceService } from 'src/app/services/user-service.service';
+import { UserForRegister } from 'src/app/model/user';
+import { AuthService } from 'src/app/services/auth.service';
 // import * as alertyfy from 'alertifyjs';
 import { AlertyfyService } from 'src/app/services/alertyfy.service';
 
@@ -12,9 +12,9 @@ import { AlertyfyService } from 'src/app/services/alertyfy.service';
 })
 export class UserRegisterComponent implements OnInit {
 registrationForm: FormGroup;
-user: User ;
+user: UserForRegister ;
 userSubmitted: boolean ;
-  constructor(private fb: FormBuilder, private userService: UserServiceService, private alertyfy: AlertyfyService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private alertyfy: AlertyfyService) { }
 
   ngOnInit() {
     // this.registrationForm = new FormGroup({
@@ -61,11 +61,14 @@ userSubmitted: boolean ;
     console.log(this.registrationForm);
     if (this.registrationForm.valid){
      // this.user = Object.assign(this.user, this.registrationForm.value);
-      this.userService.addUser(this.userData());
-
+      this.authService.registerUser(this.userData()).subscribe(()=>{
       this.registrationForm.reset();
       this.userSubmitted =  false;
       this.alertyfy.success('Submitted Successfully');
+
+      });
+
+      
       //alertify.success('Submitted Successfully');
     }else{
       this.alertyfy.error('There were errors in submitting your data');
@@ -73,7 +76,7 @@ userSubmitted: boolean ;
 
   }
 
-  userData(): User{
+  userData(): UserForRegister{
     return this.user = {
       userName : this.userName.value,
       email : this.email.value,
@@ -84,18 +87,6 @@ userSubmitted: boolean ;
 
   }
 
-  // addUser(user: any){
-  //   let users = [];
-  //   if (localStorage.getItem('User')){
-  //     users = JSON.parse(localStorage.getItem('User'));
-  //     users = [user, ...users];
-  //   }
-  //   else{
-  //     users = [user];
-  //   }
-  //   localStorage.setItem('User', JSON.stringify(users));
-
-  // }
 
   passValidator(fg: FormGroup): Validators{
     return fg.get('password').value ===  fg.get('confirmPassword').value ? null : {notmatched: true};

@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { PropertyCardComponent } from './property/property-card/property-card.component';
 import { PropertyListComponent } from './property/property-list/property-list.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HousingService } from './services/housing.service';
 import { AddPropertyComponent } from './property/add-property/add-property.component';
 import {Routes, RouterModule} from '@angular/router';
@@ -19,13 +19,13 @@ import { PropertyDetailComponent } from './property/property-detail/property-det
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserLoginComponent } from './user/user-login/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register/user-register.component';
-import { UserServiceService } from './services/user-service.service';
 import { AlertyfyService } from './services/alertyfy.service';
 import { AuthService } from './services/auth.service';
 import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SortPipe } from './pipes/sort.pipe';
+import { HttpErrorInterceptor } from './services/httperror-interceptor.service';
 const appRoutes: Routes =
 [
   {path: '', component: PropertyListComponent},
@@ -66,8 +66,13 @@ const appRoutes: Routes =
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    HousingService,
-    UserServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+
+    },
+    HousingService,    
     AlertyfyService,
     AuthService,
     PropertyDetailResolverService
