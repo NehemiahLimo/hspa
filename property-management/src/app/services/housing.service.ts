@@ -20,16 +20,20 @@ SellRent = 1;
   }
 
   getProperty(id: number){
-    return this.getAllProperties().pipe(
+    return this.getAllProperties(1).pipe(
 
       map(propertiesArray=>{
         //throw new Error('Some error here');
-        return propertiesArray.find(p => p.Id === id);
+        return propertiesArray.find(p => p.id === id);
       })
     );
   }
 
-  getAllProperties(SellRent?: number): Observable<Property[]> {
+  getAllProperties(SellRent?: number): Observable<Property[]>{
+    return this.http.get<Property[]>(this.baseUrl+'/properties/getproperties/'+SellRent.toString());
+  };
+
+  getAllPropertiesJson(SellRent?: number): Observable<Property[]> {
 
     return this.http.get('data/properties.json').pipe(
       map( data => {
