@@ -1,8 +1,8 @@
 
   <div class="card">
     <div class="image-wrapper">
-      <img *ngIf="property.Image" class="propImage" src="assets/images/{{property.image}}.png">
-      <img *ngIf="!property.Image" class="propImage" src="assets/images/prop6.png">
+      <img *ngIf="property.image" class="propImage" src="assets/images/{{property.image}}.png">
+      <img *ngIf="!property.image" class="propImage" src="assets/images/prop6.png">
 
       <ul *ngIf="!hideIcons" class="list-inline text-center member-icons animate">
           <li class="list-inline-item">
@@ -19,10 +19,10 @@
 
       in {{property.name}}
       <span *ngIf="property.name">,</span>
-      {{property.City}}
+      {{property.city}}
 
       <h6  class="mt-2">{{property.furnishingType}}
-      <span *ngIf="property.furnishingType !== 'Unfurnished'">Furnished</span> | Ready to Move</h6>
+      <span *ngIf="property.furnishingType !== 'Unfurnished'">Furnished</span> | <span *ngIf="property.readyToMove">Ready to Move </span><span *ngIf="!property.readyToMove">Possession Date: {{property.estPossessionOn|date}} </span> </h6>
 
       <hr class="mt-0 mb-2">
 

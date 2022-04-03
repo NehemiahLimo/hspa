@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using webAPI.Data.DTO;
 using webAPI.Data.Interfaces;
+
 
 namespace webAPI.Controllers
 {
@@ -29,6 +31,15 @@ namespace webAPI.Controllers
             var data = await uow.PropertyRepository.GetPropertiesAsync(sellRent);
             var propertyListDto = mapper.Map<IEnumerable<PropertyListDTO>>(data);
             return Ok(propertyListDto);
+        }
+
+        [HttpGet("data/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPropertyData(int id)
+        {
+            var data = await uow.PropertyRepository.GetPropertyDetailAsync(id);
+            var propertyDto = mapper.Map<PropertyDetailDTO>(data);
+            return Ok(propertyDto);
         }
     }
 }

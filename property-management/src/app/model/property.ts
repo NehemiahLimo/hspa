@@ -1,7 +1,7 @@
 import { IPropertyBase } from './ipropertybase';
 
 export class Property implements IPropertyBase {
-  Phone: number;
+
   id: number;
   sellRent: number;
   name: string;
@@ -10,21 +10,20 @@ export class Property implements IPropertyBase {
   furnishingType: string;
   price: number;
   builtArea: number;
-  CarpetArea?: number;
-  Address: string;
-  Address2?: string;
+  carpetArea?: number;
+  address: string;
+  address2?: string;  
   city: string;
-  FloorNo?: string;
-  TotalFloor?: string;
+  floorNo?: string;
+  totalFloors?: string;
   readyToMove: number;
-  AOP?: string;
-  MainEntrance?: string;
-  Security?: number;
-  Gated?: number;
-  Maintenance?: number;
-  Possession?: string;
+  age?: string;
+  mainEntrance?: string;
+  security?: number;
+  gated?: boolean;
+  maintenance?: number;
+  estPossessionOn?: Date;
   image?: string;
-  Description?: string;
-  PostedOn: string;
-  PostedBy: number;
+  description?: string;
+
 }

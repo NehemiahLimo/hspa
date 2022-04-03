@@ -18,5 +18,6 @@ namespace webAPI.Data.DTO
         public string City { get; set; }
         public string Country { get; set; }
         public bool ReadyToMove { get; set; }
+        public DateTime EstPossessionOn { get; set; }
     }
 }
