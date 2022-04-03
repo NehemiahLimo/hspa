@@ -54,7 +54,7 @@ namespace webAPI.Controllers
         public async Task<IActionResult> AddCity(CityDto cityDto)
         {
             var city = mapper.Map<City>(cityDto);
-            city.LastUpdate = DateTime.Now;
+            city.LastUpdatedOn = DateTime.Now;
             city.LastUpdatedBy = 1;
 
             /*var city = new City
@@ -78,7 +78,7 @@ namespace webAPI.Controllers
             var city = await uow.CityRepository.FindCity(id);
             if (city == null)
                 return BadRequest("Update not allowed at all.");
-            city.LastUpdate = DateTime.Now;
+            city.LastUpdatedOn = DateTime.Now;
             city.LastUpdatedBy = 1;
             mapper.Map(cityDto, city);
 
@@ -95,7 +95,7 @@ namespace webAPI.Controllers
            
                 var city = await uow.CityRepository.FindCity(id);
 
-                city.LastUpdate = DateTime.Now;
+                city.LastUpdatedOn = DateTime.Now;
                 city.LastUpdatedBy = 1;
                 mapper.Map(cityDto, city);
                 await uow.SaveAsync();
@@ -110,7 +110,7 @@ namespace webAPI.Controllers
         {
             var city = await uow.CityRepository.FindCity(id);
 
-            city.LastUpdate = DateTime.Now;
+            city.LastUpdatedOn = DateTime.Now;
             city.LastUpdatedBy = 1;
             /*mapper.Map(cityDto, city);*/
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -11,11 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using webAPI.Data.DTO;
 using webAPI.Data.Interfaces;
+using webAPI.Errors;
+using webAPI.Extensions;
 using webAPI.Models;
 
 namespace webAPI.Controllers
 {
-   
+    
     public class AccountController : BaseController
     {
         private readonly IUnitOfWork uow;
@@ -37,9 +40,15 @@ namespace webAPI.Controllers
         public async Task<IActionResult> Login(LoginReqDto loginReq)
         {
             var user = await uow.UserRepository.Authenticate(loginReq.UserName, loginReq.Password);
-            if(user == null)
+
+            ApiError apiError = new ApiError();
+                     
+            if(user is null)
             {
-                return Unauthorized();
+                apiError.ErrorCode = Unauthorized().StatusCode;
+                apiError.ErrorMessage = "Invalid user credentials";
+                apiError.ErrorDetails = "This error appears when the entered user id or password is incorrect";
+                return Unauthorized(apiError);
             }
             var loginRes = new LoginResDto();
             loginRes.UserName = user.Username;
@@ -51,8 +60,24 @@ namespace webAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(LoginReqDto loginReq)
         {
+
+            ApiError apiError = new ApiError();
+            if (loginReq.UserName.IsEmpty()||
+                loginReq.Password.IsEmpty())
+            {
+                apiError.ErrorCode = BadRequest().StatusCode;
+                apiError.ErrorMessage = "Username or password cannot be blannk";
+                return BadRequest(apiError);
+            }
+           
             if (await uow.UserRepository.UserAlreadyExist(loginReq.UserName))
-                return BadRequest("Username Already exist");
+            {
+                apiError.ErrorCode = BadRequest().StatusCode;
+                apiError.ErrorMessage = "Username Already exist";
+                return BadRequest(apiError);
+
+            }              
+               
             uow.UserRepository.Register(loginReq.UserName, loginReq.Password);
             await uow.SaveAsync();
             return StatusCode(201);

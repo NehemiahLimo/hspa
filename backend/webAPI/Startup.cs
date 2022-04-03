@@ -43,7 +43,7 @@ namespace webAPI
                 builder.Password = Configuration.GetSection("DBPassword").Value;
             var connectionString = builder.ConnectionString;
             IdentityModelEventSource.ShowPII = true;
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString, p => p.EnableRetryOnFailure()));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), p => p.EnableRetryOnFailure()));
             services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
             services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
