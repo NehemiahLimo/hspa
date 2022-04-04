@@ -21,6 +21,12 @@ namespace webAPI.Data
 
         public IPropertyRepository PropertyRepository => new PropertyRepository(db);
 
+        public IFurnishingTypeRepository FurnishingTypeRepository =>
+            new FurnishingTypeRepository(db);
+
+        public IPropertyTypeRepository PropertyTypeRepository =>
+            new PropertyTypeRepository(db);
+
         public async Task<bool> SaveAsync()
         {
             return await db.SaveChangesAsync() > 0;

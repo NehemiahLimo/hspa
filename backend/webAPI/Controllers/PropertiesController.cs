@@ -12,9 +12,8 @@ using webAPI.Data.Interfaces;
 
 namespace webAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PropertiesController : ControllerBase
+   
+    public class PropertiesController : BaseController
     {
         private readonly IUnitOfWork uow;
         private readonly IMapper mapper;

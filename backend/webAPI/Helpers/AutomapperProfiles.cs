@@ -23,6 +23,10 @@ namespace webAPI.Helpers
                 .ForMember(x => x.PropertyType, opt => opt.MapFrom(src => src.PropertyType.Name))
                 .ForMember(x => x.Country, opt => opt.MapFrom(src => src.City.Country));
 
+            CreateMap<FurnishingType, KeyValuePairDto>();
+
+            CreateMap<PropertyType, KeyValuePairDto>();
+
         }
     }
 }

@@ -11,6 +11,6 @@ export interface IPropertyBase
    readyToMove: number;
    price: number;
    image?: string;
-   estPossessionOn?:Date;
+   estPossessionOn?:string;
 
  }

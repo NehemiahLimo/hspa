@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { IKeyvaluepair } from 'src/app/model/IKeyValuePair';
 
 import { IPropertyBase } from 'src/app/model/ipropertybase';
 import { Property } from 'src/app/model/property';
@@ -21,8 +22,8 @@ export class AddPropertyComponent implements OnInit {
   nextClicked: boolean;
   property = new Property();
 
-  propertyTypes: Array<string> = ['House', 'Apartments', 'Duplex'];
-  furnishTypes: Array<string> = ['Fully', 'Semi', 'Unfurnished'];
+  propertyTypes: IKeyvaluepair[];
+  furnishTypes: IKeyvaluepair[];
   dir: Array<string> = ['East', 'West', 'North', 'South'];
 
 cityList: string[];
@@ -53,6 +54,13 @@ cityList: string[];
     this.housingService.getAllCities().subscribe(data=>{
       this.cityList=data;
       console.log("---Data---",data);
+    })
+
+    this.housingService.getPropertyTypes().subscribe(data=>{
+      this.propertyTypes = data;
+    })
+    this.housingService.getFurnishingTypes().subscribe(data=>{
+      this.furnishTypes = data;
     })
   }
 
