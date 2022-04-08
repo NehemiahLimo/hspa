@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using webAPI.Data.DTO;
 using webAPI.Data.Interfaces;
-
+using webAPI.Models;
 
 namespace webAPI.Controllers
 {
@@ -39,6 +39,19 @@ namespace webAPI.Controllers
             var data = await uow.PropertyRepository.GetPropertyDetailAsync(id);
             var propertyDto = mapper.Map<PropertyDetailDTO>(data);
             return Ok(propertyDto);
+        }
+
+        [HttpPost("add_data")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AddProperty(PropertyDTO propertydto)
+        {
+            var property = mapper.Map<Property>(propertydto);//, await uow.PropertyRepository.AddProperty(property);
+            property.PostedBy = 2;
+            property.LastUpdatedBy = 2;
+            uow.PropertyRepository.AddProperty(property);
+            await uow.SaveAsync();
+            return StatusCode(201);
+
         }
     }
 }

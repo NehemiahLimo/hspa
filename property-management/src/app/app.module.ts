@@ -26,6 +26,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SortPipe } from './pipes/sort.pipe';
 import { HttpErrorInterceptor } from './services/httperror-interceptor.service';
+import { DatePipe } from '@angular/common';
 const appRoutes: Routes =
 [
   {path: '', component: PropertyListComponent},
@@ -72,6 +73,7 @@ const appRoutes: Routes =
       multi: true
 
     },
+    DatePipe,
     HousingService,    
     AlertyfyService,
     AuthService,

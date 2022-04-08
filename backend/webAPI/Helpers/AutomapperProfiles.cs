@@ -10,6 +10,7 @@ namespace webAPI.Helpers
         {
             CreateMap<City, CityDto>().ReverseMap();
             CreateMap<City, CityUpdateDto>().ReverseMap();
+            CreateMap<Property, PropertyDTO>().ReverseMap();
             CreateMap<Property, PropertyListDTO>()
                 .ForMember(x => x.City, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(x => x.FurnishingType, opt => opt.MapFrom(src => src.FurnishingType.Name))

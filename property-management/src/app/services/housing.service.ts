@@ -72,14 +72,16 @@ SellRent = 1;
   }
 
   addProperty(property: Property){
-    let newProp = [property];
+    return this.http.post(this.baseUrl+'/properties/add_data', property);
 
-    // Add new property in array if newProp alreay exists in local storage
-    if (localStorage.getItem('newProp')) {
-      newProp = [property,
-                  ...JSON.parse(localStorage.getItem('newProp'))];
-    }
-    localStorage.setItem('newProp', JSON.stringify(newProp));
+    // let newProp = [property];
+
+    // // Add new property in array if newProp alreay exists in local storage
+    // if (localStorage.getItem('newProp')) {
+    //   newProp = [property,
+    //               ...JSON.parse(localStorage.getItem('newProp'))];
+    // }
+    // localStorage.setItem('newProp', JSON.stringify(newProp));
   }
 
   newPropId(){

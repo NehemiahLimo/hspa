@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -42,8 +43,8 @@ cityList: string[];
 
   };
 
-  SellRent = '1';
-  constructor(private router: Router, private fb: FormBuilder, private housingService: HousingService,
+  //SellRent = '1';
+  constructor(private datePipe: DatePipe, private router: Router, private fb: FormBuilder, private housingService: HousingService,
               private alertify: AlertyfyService ) { }
 
 
@@ -225,15 +226,17 @@ cityList: string[];
     this.nextClicked = true;
     if (this.allTabsValid()) {
       this.mapProperty();
-      this.housingService.addProperty(this.property);
-      this.alertify.success('Property Added Successfully');
-      console.log(this.addProperty);
-      console.log('SellRent=' + this.addProperty.value.BasicInfo.SellRent);
-      if (this.SellRenty.value === '2') {
-        this.router.navigate(['/rent-property']);
-      } else {
-        this.router.navigate(['/']);
-      }
+      this.housingService.addProperty(this.property).subscribe(()=>{
+        this.alertify.success('Property Added Successfully');
+        console.log(this.addProperty);
+        console.log('SellRent=' + this.addProperty.value.BasicInfo.SellRent);
+        if (this.SellRenty.value === '2') {
+          this.router.navigate(['/rent-property']);
+        } else {
+          this.router.navigate(['/']);
+        }
+      });
+      
     } else {
       this.alertify.error('Review needed');
     }
@@ -243,12 +246,12 @@ cityList: string[];
 
   mapProperty(): void {
     this.property.id = this.housingService.newPropId();
-    this.property.sellRent = +this.SellRent.valueOf;
+    this.property.sellRent = +this.SellRenty.value;
     this.property.bhk = this.BHK.value;
-    this.property.propertyType = this.PType.value;
+    this.property.propertyTypeId = this.PType.value;
     this.property.name = this.Name.value;
-    this.property.city = this.City.value;
-    this.property.furnishingType = this.FType.value;
+    this.property.CityId = this.City.value;
+    this.property.furnishingTypeId = this.FType.value;
     this.property.price = this.Price.value;
     this.property.security = this.Security.value;
     this.property.maintenance = this.Maintenance.value;
@@ -259,10 +262,10 @@ cityList: string[];
     this.property.address = this.Address.value;
     this.property.address2 = this.LandMark.value;
     this.property.readyToMove = this.RTM.value;
-    this.property.age = this.AOP.value;
+    //this.property.age = this.AOP.value;
     this.property.gated = this.Gated.value;
     this.property.mainEntrance = this.MainEntrance.value;
-    this.property.estPossessionOn = this.PossessionOn.value;
+    this.property.estPossessionOn = this.datePipe.transform(this.PossessionOn.value,'MM/dd/yyyy');
     this.property.description = this.Description.value;
    
   }
